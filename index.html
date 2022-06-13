@@ -33,6 +33,53 @@
         <input id="input-adress" type="text" v-model="adress">
     </fieldset>
 
+    <fieldset>
+        <legend>v-if</legend>
+        <label for="input-grade">Nota:</label>
+        <input id="input-grade" type="text" v-model="grade">
+        <p v-if="grade < 60" >Reprovado</p>
+        <p v-else-if="grade >= 60 && grade < 98">Aprovado</p>
+        <p v-else-if="grade >= 98">Aprovado com excelencia</p>
+        <p v-else=>Valor inválido</p>
+    </fieldset>
+
+    <fieldset>
+        <legend>v-show</legend>
+        <button v-show="!isUserLogged" @click="isUserLogged = !isUserLogged">Login</button>
+        <button v-show="isUserLogged" @click="isUserLogged = !isUserLogged">Logout</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>v-text</legend>
+        <p>{{firstName}}</p>
+        <p v-text="firstName"></p>
+    </fieldset>
+
+    <fieldset>
+        <legend>v-html</legend>
+        <div v-html="htmlContent"></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>v-once</legend>
+        <div v-html="htmlContent"></div>
+        <p v-once>{{count}}</p>
+        <p>{{count}}</p>
+        <button @click="count++">Adicionar</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>v-for</legend>
+        <h4>Marcas</h4>
+        <ul>
+            <li v-for="brand in carBrands">{{brand}}</li>
+        </ul>
+        <h4>Carros</h4>
+        <ul>
+            <li v-for="car in cars">{{car.name}} {{car.brand}}</li>
+        </ul>
+    </fieldset>
+
 </div>
 
     <script src="https://unpkg.com/vue@3.0.4"></script>
@@ -44,7 +91,14 @@
                     firstName: "Samuel",
                     lastName: "Chagas",
                     age: 33,
-                    adress: ""
+                    adress: "",
+                    grade:5,
+                    isUserLogged: false,
+                    count: 1,
+                    carBrands: ["VW", "Honda", "Fiat", "GM", "Ford"],
+                    cars: [{name: "Gol", brand: "VW", year: 2011, km: 94000},
+                            {name: "Honda", brand: "Civic"},
+                            {name: "Sandero", brand: "Renault"}]
                 }
             },
             methods: {
