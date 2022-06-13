@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+</head>
+<body>
+<div id="hello-world">
+    <fieldset>
+        <legend>Template</legend>
+        <div v-html="htmlContent"></div>
+        <p>Primeiro nome: {{firstName}}</p>
+        <p>Último nome: {{lastName}}</p>
+        <p>Idade: {{age}}</p>
+        <p>{{age >= 18 ? 'Maior de idade.' : 'Menor de idade.'}}</p>
+    </fieldset>
+
+    <fieldset>
+        <legend>Methods</legend>
+        <button v-on:click="incrementAge">Incrementar idade</button>
+        <button @click="decrementAge">Decrementar idade</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>Computed properties</legend>
+        <p>Nome completo: {{fullName}}</p>
+    </fieldset>
+
+    <fieldset>
+        <legend>Watchers</legend>
+        <label for="input-adress">Endereço:</label>
+        <input id="input-adress" type="text" v-model="adress">
+    </fieldset>
+
+</div>
+
+    <script src="https://unpkg.com/vue@3.0.4"></script>
+    <script>
+        const app = {
+            data() {
+                return{
+                    htmlContent: "<h3>Hello world Vue.JS</h3>",
+                    firstName: "Samuel",
+                    lastName: "Chagas",
+                    age: 33,
+                    adress: ""
+                }
+            },
+            methods: {
+                incrementAge() {
+                    this.age++;
+                },
+                decrementAge(){
+                    if(this.age > 0){
+                        this.age--;
+                    }
+                },
+            },
+            computed: {
+                    fullName: function() {
+                        return `${this.firstName} ${this.lastName}`;
+                        console.log(fullName)
+                    }
+                },
+            watch: {
+                adress: function(newValue, oldValue) {
+                    
+                }
+            }    
+        }
+
+        Vue.createApp(app).mount("#hello-world")
+    </script>
+</body>
+</html>
