@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue.js</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div id="hello-world">
@@ -76,8 +81,58 @@
         </ul>
         <h4>Carros</h4>
         <ul>
-            <li v-for="car in cars">{{car.name}} {{car.brand}}</li>
+            <li v-for="car in cars">{{car.name}} ({{car.brand}})</li>
         </ul>
+
+        <h4>Carro</h4>
+        <p v-for="(value, key, index) in car">{{index}}-{{key}}-{{value}}</p>
+    </fieldset>
+
+    <fieldset>
+        <legend>v-bind</legend>
+        <a v-bind:href="urlIgti" :title="urlDescription">IGTI</a>
+    </fieldset>
+
+    <fieldset>
+        <legend>v-model</legend>
+
+        <label for="input-firstname">Primeiro nome: </label>
+        <input id="input-firstname" type="text" v-model="firstName">
+        <br/>
+
+        <label for="textarea-html">HTML:</label>
+        <textarea id="textarea-html" v-model="htmlContent"></textarea>
+        <br/>
+
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{checked}}</label>
+        <br/>
+
+        <input type="radio" id="one" value="Um" v-model="selectedOption">
+        <label for="one">Um</label>
+        <input type="radio" id="two" value="Dois" v-model="selectedOption">
+        <label for="two">Dois</label>
+        <p>Opção escolhida: {{selectedOption}}</p>
+
+        <select v-model="selectedCar">
+            <option v-for="car in cars" v-bind:value="car">
+                {{car.name}} - {{car.brand}}
+            </option>
+        </select>
+        <p>Carro escolhido: {{selectedCar.name}}-{{selectedCar.brand}}</p>
+    </fieldset>
+
+    <fieldset>
+        <legend>v-pre</legend>
+        <p>{{firstName}}</p>
+        <p v-pre>{{firstName}}</p>
+    </fieldset>
+
+    
+    <fieldset>
+        <legend>v-cloak</legend>
+        <p>{{firstName}}</p>
+        <p v-cloak>{{firstName}}</p>
     </fieldset>
 
 </div>
@@ -98,7 +153,14 @@
                     carBrands: ["VW", "Honda", "Fiat", "GM", "Ford"],
                     cars: [{name: "Gol", brand: "VW", year: 2011, km: 94000},
                             {name: "Honda", brand: "Civic"},
-                            {name: "Sandero", brand: "Renault"}]
+                            {name: "Sandero", brand: "Renault"}],
+                    car: {name: "Gol", brand: "VW", year: 2011, km: 94000},
+                    urlIgti: "https://www.igti.com.br",
+                    urlDescription: "Clique aqui para acessar o site do IGTI",
+                    argument: "title",
+                    checked: false,
+                    selectedOption: "",
+                    selectedCar: {}        
                 }
             },
             methods: {
